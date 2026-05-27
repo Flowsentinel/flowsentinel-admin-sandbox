@@ -32,7 +32,7 @@ export default function Tickets() {
   })
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="mb-6">
         <h1 className="text-xl font-bold text-slate-900">Tickets</h1>
         <p className="text-sm text-slate-500 mt-0.5">{tickets.length} total</p>
@@ -58,13 +58,13 @@ export default function Tickets() {
         </select>
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-slate-200 overflow-x-auto">
         {isLoading ? (
           <div className="p-8 text-center text-sm text-slate-400">Loading...</div>
         ) : filtered.length === 0 ? (
           <div className="p-8 text-center text-sm text-slate-400">No tickets found</div>
         ) : (
-          <table className="w-full text-sm">
+          <table className="w-full text-sm min-w-[580px]">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
                 <th className="text-left px-4 py-3 font-medium text-slate-600">Subject</th>

@@ -105,7 +105,7 @@ export default function TenantDetail() {
       </div>
 
       {/* Licenses */}
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-slate-200 overflow-x-auto">
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200">
           <h2 className="text-sm font-semibold text-slate-700">Licenses</h2>
           <button
@@ -118,7 +118,7 @@ export default function TenantDetail() {
         {licenses.length === 0 ? (
           <div className="p-6 text-center text-sm text-slate-400">No licenses yet</div>
         ) : (
-          <table className="w-full text-sm">
+          <table className="w-full text-sm min-w-[560px]">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
                 <th className="text-left px-4 py-3 font-medium text-slate-600">Status</th>

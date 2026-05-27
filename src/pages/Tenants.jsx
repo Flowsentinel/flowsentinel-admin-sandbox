@@ -51,7 +51,7 @@ export default function Tenants() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-xl font-bold text-slate-900">Tenants</h1>
@@ -75,13 +75,13 @@ export default function Tenants() {
         />
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-slate-200 overflow-x-auto">
         {isLoading ? (
           <div className="p-8 text-center text-sm text-slate-400">Loading...</div>
         ) : filtered.length === 0 ? (
           <div className="p-8 text-center text-sm text-slate-400">No tenants found</div>
         ) : (
-          <table className="w-full text-sm">
+          <table className="w-full text-sm min-w-[580px]">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
                 <th className="text-left px-4 py-3 font-medium text-slate-600">Company</th>

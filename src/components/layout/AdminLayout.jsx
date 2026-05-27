@@ -1,7 +1,8 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, Building2, Key, Users, Ticket,
-  ShieldAlert, ScrollText, LogOut, HelpCircle,
+  ShieldAlert, ScrollText, LogOut, HelpCircle, Menu, X,
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 
@@ -20,7 +21,12 @@ const adminNavItems = [
 
 export function AdminLayout() {
   const { profile, logout } = useAuthStore()
-  const navigate = useNavigate()
+  const navigate  = useNavigate()
+  const location  = useLocation()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  // Close drawer on route change
+  useEffect(() => { setSidebarOpen(false) }, [location.pathname])
 
   async function handleLogout() {
     await logout()
@@ -33,18 +39,39 @@ export function AdminLayout() {
   return (
     <div className="flex h-screen bg-slate-100 overflow-hidden">
 
-      {/* ── Sidebar ──────────────────────────────────────────────────────────── */}
-      <aside className="w-56 flex flex-col shrink-0" style={{ background: '#0d1526' }}>
+      {/* ── Mobile backdrop ─────────────────────────────────────────────────── */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
+      {/* ── Sidebar ──────────────────────────────────────────────────────────── */}
+      <aside
+        className={`
+          fixed inset-y-0 left-0 z-40 flex flex-col w-64 shrink-0
+          transition-transform duration-300 ease-in-out
+          md:relative md:w-56 md:z-auto md:translate-x-0
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+        style={{ background: '#0d1526' }}
+      >
         {/* Brand */}
-        <div className="px-4 py-5 border-b border-white/5">
-          <div className="flex items-center gap-2.5">
+        <div className="px-4 py-5 border-b border-white/5 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 min-w-0">
             <img src="/icon.svg" alt="FlowSentinel" className="h-8 w-8 shrink-0" />
             <div className="min-w-0">
               <p className="font-semibold text-white text-sm leading-tight tracking-tight">FlowSentinel</p>
               <p className="text-[10px] text-indigo-300/70 leading-tight truncate">Admin Portal</p>
             </div>
           </div>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="md:hidden shrink-0 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
         {/* Nav */}
@@ -109,12 +136,9 @@ export function AdminLayout() {
         {/* User footer */}
         <div className="border-t border-white/5 px-2.5 py-3">
           <div className="flex items-center gap-2.5 px-2">
-            {/* Avatar */}
             <div className="h-8 w-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-semibold shrink-0">
               {initials || '?'}
             </div>
-
-            {/* Name + role */}
             <div className="min-w-0 flex-1">
               <p className="text-xs font-semibold text-white truncate leading-tight">
                 {displayName}
@@ -123,8 +147,6 @@ export function AdminLayout() {
                 {profile?.role?.replace('_', ' ').toLowerCase() ?? ''}
               </p>
             </div>
-
-            {/* Logout */}
             <button
               onClick={handleLogout}
               title="Sign out"
@@ -137,9 +159,27 @@ export function AdminLayout() {
       </aside>
 
       {/* ── Main ─────────────────────────────────────────────────────────────── */}
-      <main className="flex-1 overflow-y-auto bg-slate-50">
-        <Outlet />
-      </main>
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+
+        {/* Mobile top bar */}
+        <div className="md:hidden flex items-center justify-between px-4 py-3 shrink-0 border-b border-white/5" style={{ background: '#0d1526' }}>
+          <div className="flex items-center gap-2.5">
+            <img src="/icon.svg" alt="FlowSentinel" className="h-7 w-7" />
+            <span className="font-semibold text-white text-sm">FlowSentinel</span>
+          </div>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="text-slate-300 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Page content */}
+        <main className="flex-1 overflow-y-auto bg-slate-50">
+          <Outlet />
+        </main>
+      </div>
     </div>
   )
 }
