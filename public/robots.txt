@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# FlowSentinel admin portal — private platform administration, not intended for public indexing
