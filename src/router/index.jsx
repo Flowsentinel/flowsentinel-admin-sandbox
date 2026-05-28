@@ -14,6 +14,7 @@ import Tickets from '@/pages/Tickets'
 import TicketDetail from '@/pages/TicketDetail'
 import TamperEvents from '@/pages/TamperEvents'
 import AuditLogs from '@/pages/AuditLogs'
+import TenantHealth from '@/pages/TenantHealth'
 
 export const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
       { path: 'tickets/:id', element: <TicketDetail /> },
       { path: 'tamper-events', element: <TamperEvents /> },
       { path: 'audit-logs', element: <AuditLogs /> },
+      { path: 'tenant-health', element: <TenantHealth /> },
       {
         path: 'admin-users',
         element: <ProtectedRoute requiredRole="SUPER_ADMIN"><AdminUsers /></ProtectedRoute>,

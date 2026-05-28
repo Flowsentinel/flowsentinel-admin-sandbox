@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, Building2, Key, Users, Ticket,
-  ShieldAlert, ScrollText, LogOut, HelpCircle, Menu, X,
+  ShieldAlert, ScrollText, LogOut, HelpCircle, Menu, X, Activity,
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 
 const navItems = [
   { to: '/dashboard',     icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/tenants',       icon: Building2,        label: 'Tenants' },
+  { to: '/tenant-health', icon: Activity,         label: 'Tenant Health' },
   { to: '/licenses',      icon: Key,              label: 'Licenses' },
   { to: '/tickets',       icon: Ticket,           label: 'Support Tickets' },
   { to: '/tamper-events', icon: ShieldAlert,      label: 'Tamper Events' },
