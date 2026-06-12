@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 import { Badge } from '@/components/ui/Badge'
 
-const statusVariant = { ACTIVE: 'success', REVOKED: 'danger', EXPIRED: 'warning' }
+const statusVariant = { GENERATED: 'info', ACTIVATED: 'success', REVOKED: 'danger', EXPIRED: 'warning' }
 
 async function fetchLicenses() {
   const { data, error } = await supabase

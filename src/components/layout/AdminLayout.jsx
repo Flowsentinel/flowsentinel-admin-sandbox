@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, Building2, Key, Users, Ticket,
-  ShieldAlert, ScrollText, LogOut, HelpCircle, Menu, X, Activity,
+  ShieldAlert, ScrollText, LogOut, HelpCircle, Menu, X, Activity, Handshake,
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 
@@ -11,6 +11,7 @@ const navItems = [
   { to: '/tenants',       icon: Building2,        label: 'Tenants' },
   { to: '/tenant-health', icon: Activity,         label: 'Tenant Health' },
   { to: '/licenses',      icon: Key,              label: 'Licenses' },
+  { to: '/partners',      icon: Handshake,        label: 'Partners' },
   { to: '/tickets',       icon: Ticket,           label: 'Support Tickets' },
   { to: '/tamper-events', icon: ShieldAlert,      label: 'Tamper Events' },
   { to: '/audit-logs',    icon: ScrollText,       label: 'Audit Logs' },
